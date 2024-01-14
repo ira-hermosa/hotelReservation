@@ -4,14 +4,26 @@ public class Room implements IRoom{
 
     //RoomType comes from the RoomType enumeration
     private RoomType RoomType;
+
+    private ChargingType chargingType;
     private String roomNumber;
     private double price;
 
     //Constructor of this class
-    public Room(model.RoomType roomType, String roomNumber, double price) {
+    public Room(model.RoomType roomType, String roomNumber, double price, ChargingType chargingType) {
         this.RoomType = roomType;
         this.roomNumber = roomNumber;
-        this.price = price;
+        this.chargingType = chargingType;
+        if (chargingType == ChargingType.FREE) {
+            this.price = 0;
+        }
+        else {
+            this.price = price;
+        }
+    }
+
+    public ChargingType getChargingType() {
+        return chargingType;
     }
 
     /*
@@ -34,7 +46,7 @@ public class Room implements IRoom{
 
     @Override
     public boolean isFree() {
-        return false;
+        return chargingType == ChargingType.FREE;
     }
 
     /*
